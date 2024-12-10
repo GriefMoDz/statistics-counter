@@ -36,8 +36,7 @@
     "paths": {
       "@lib": ["src/lib"],
       "@lib/*": ["src/lib/*"],
-      "@i18n": ["src/i18n"],
-      "@i18n/*": ["src/i18n/*"],
+      "@i18n": ["src/i18n/en-US.messages"],
       "@components": ["src/components"],
       "@components/*": ["src/components/*"],
       "@types": ["src/types/"],

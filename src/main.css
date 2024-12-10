@@ -23,6 +23,7 @@
 }
 
 .statistic-counter-list-item {
+  z-index: 999;
   display: flex;
   justify-content: center;
   margin-bottom: 8px;

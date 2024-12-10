@@ -1,5 +1,5 @@
 import type { CounterSettings, CounterStoreState, CounterStore as CounterStoreType, CounterType } from '@types';
-import type { Store } from 'replugged/dist/renderer/modules/webpack/common/flux';
+import { Store } from 'replugged/dist/renderer/modules/common/flux';
 
 import { SettingsManager } from 'replugged/dist/renderer/apis/settings';
 import { common, settings } from 'replugged';
@@ -40,4 +40,4 @@ class CounterStore extends Flux.Store {
 export default (Flux.Store?.getAll?.().find((store: Store) => store.getName() === CounterStore.displayName) ||
   new CounterStore(FluxDispatcher, {
     [ActionTypes.STATISTIC_COUNTER_SET_ACTIVE]: ({ counter }) => (activeCounter = counter)
-  })) as CounterStoreType;
+  })) as CounterStoreType & Store;

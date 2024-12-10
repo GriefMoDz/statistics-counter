@@ -3,6 +3,7 @@ import type { Store } from 'replugged/dist/renderer/modules/webpack/common/flux'
 import type { SettingsManager } from 'replugged/dist/renderer/apis/settings';
 import type { RawModule, ReactComponent } from 'replugged/dist/types';
 import type { Counters } from '@lib/constants';
+import { DragProvider } from '@types';
 
 type Comparator<T> = (a: T, b: T) => boolean;
 type Predicate<Arg> = (arg: Arg) => boolean;
@@ -125,21 +126,27 @@ interface DragSourceItem {
   name?: string;
 }
 
-type DragSourceHook = (
-  items: DragSourceItem[],
-  callback: (items: DragSourceItem[]) => void
-) => {
-  handleDragStart: (optionId: string | number) => void;
-  handleDragComplete: (optionId: string | number) => void;
-  handleDragReset: () => void;
-};
+interface DragProvider {
+  useDrag: (
+    cb: () => {
+      type: string;
+      item: { id: props.counter };
+    }
+  ) => [unknown, (...args: unknown[]) => unknown];
+  useDrop: (
+    cb: () => {
+      accept: string;
+      drop: (item: { id: props.counter }) => void;
+    }
+  ) => [unknown, (...args: unknown[]) => unknown];
+}
 interface CounterItemsProps {
   availableCounters: CounterType[];
   onChange: (newValue: CounterType[] | (Record<string, unknown> & { value: CounterType[] | undefined }) | undefined) => void;
 }
 
 interface MenuControlItemProps {
-  disabled: boolean;
+  disabled?: boolean;
   isFocused: boolean;
   onClose: () => void;
 }
